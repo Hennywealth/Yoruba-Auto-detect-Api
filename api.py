@@ -3,8 +3,10 @@ import os
 from flask.json import jsonify
 import Spell_Detector
 from AutoCorrect import SpellChecker
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/api/search", methods=["GET", "POST"])
