@@ -1,6 +1,6 @@
-from flask import Flask, request, make_response
+from flask import Flask, render_template, request, redirect,abort,flash, make_response
+import os
 from flask.json import jsonify
-import Spell_Detector
 from AutoCorrect import SpellChecker
 from flask_cors import CORS
 
@@ -19,7 +19,7 @@ def show():
         result_dict = parser.check(json_to_dict_data)
         return make_response(jsonify(result_dict), 200)
         
-
+    
 if __name__ == '__main__':
     app.run(debug=True)
 

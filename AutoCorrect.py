@@ -1,7 +1,5 @@
 import re
 from collections import Counter
-import numpy as np
-import string
 
 class SpellChecker(object):
 
@@ -19,7 +17,9 @@ class SpellChecker(object):
 
 
     def _level_one_edits(self, word):
-        letters = string.nscii_lowercase
+
+        letters = 'a', 'à', 'á', 'b', 'd', 'e', 'é', 'ẹ', 'è', 'ẹ̀' , 'ẹ́', 'f', 'g','gb', 'h', 'i', 'í', 'ì', 'j', 'k', 'l', 'm', 'n', 'o', 'ó', 'ò', 'ọ̀', 'ọ', 'ọ́', 'p', 'r', 's', 'ṣ', 't', 'u', 'w', 'y'  
+
         splits = [(word[:i], word[i:]) for i in range(len(word) + 1)]
 
         deletes = [l + r[1:] for l,r in splits if r]
@@ -36,11 +36,7 @@ class SpellChecker(object):
     def _second_level_edits(self, word):
         return set(e2 for e1 in self._level_one_edits(word) for e2 in self._level_one_edits(e1))
 
-
-    # def _level_three_edit(self,word):
-    #   pass
-
-
+ 
     def check(self, word):
         candidates = self._level_one_edits(word) or self._second_level_edits(word) or [word]
         valid_candidates = [w for w in candidates if w in self.vocabulary]
@@ -60,10 +56,7 @@ class SpellChecker(object):
                 str1 += ", " + self.listToString(element)
         return str1
 
-# checker = SpellChecker("dictionary.txt")
-# check_words = checker.check("asa")
 
-# print(check_words)
 
 
 
